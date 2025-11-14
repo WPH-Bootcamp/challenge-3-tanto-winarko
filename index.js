@@ -1,8 +1,9 @@
 "use strict";
 
+// Variable Declaration
 const prompt = require("prompt-sync")();
-let numberA = null;
 let operator = null;
+let numberA = null;
 let numberB = null;
 let numberResult = null;
 let oddEvenStatus = null;
@@ -17,7 +18,15 @@ const validOperationDesc = [
   "Modulo",
   "Exponential",
 ];
+let message = "\n";
 
+/* 
+Function getValidNumberInput 
+Objective: to get an input number from user using prompt()
+           and check validity of input number
+           if user doesn't input any value or whitespace, it will automatically define as 0
+           return the valid number based on user input
+*/
 function getValidNumberInput(num) {
   let needValidNumber = true;
   let inputNumber;
@@ -44,6 +53,13 @@ function getValidNumberInput(num) {
   return inputNumber;
 }
 
+/* 
+Function getValidOperatorInput 
+Objective: to get an operator used by the user to perform calculation using prompt()
+           only 6 pre-predefined operator that can be chosen by the user.
+           this function also check validity of the input operator
+           return the valid operator chosen by the user
+*/
 function getValidOperatorInput() {
   let needValidOperator = true;
   let inputOperator;
@@ -72,18 +88,38 @@ function getValidOperatorInput() {
   return inputOperator;
 }
 
+/* 
+Function add
+Objective: to perform addition calculation
+           return the result of addition calculation
+*/
 function add(a, b) {
   return a + b;
 }
 
+/* 
+Function subtract
+Objective: to perform subtraction calculation
+           return the result of subtraction calculation
+*/
 function subtract(a, b) {
   return a - b;
 }
 
+/* 
+Function multiply
+Objective: to perform multiplication calculation
+           return the result of multiplication calculation
+*/
 function multiply(a, b) {
   return a * b;
 }
 
+/* 
+Function divide
+Objective: to perform division calculation
+           return the result of division calculation
+*/
 function divide(a, b) {
   if (b == 0) {
     console.log("Error: Division by zero!");
@@ -93,17 +129,28 @@ function divide(a, b) {
   }
 }
 
+/* 
+Function modulo
+Objective: to perform modulo calculation
+           return the result of modulo calculation
+*/
 function modulo(a, b) {
   return a % b;
 }
 
+/* 
+Function power
+Objective: to perform exponential calculation
+           return the result of exponential calculation
+*/
 function power(a, b) {
   return a ** b;
 }
 
-// Start the program
-let message = "\n";
-
+/* 
+Starting the program by welcoming the user 
+and give some initial information to perform calculation
+*/
 for (let i = 0; i < 50; i++) {
   message = message + "*";
 }
@@ -127,6 +174,10 @@ do {
 
   console.log(message);
 
+  /* 
+  This program will ask for operator first to identify
+  what type of calculation that would like to be performed by the user
+  */
   operator = getValidOperatorInput();
 
   console.log(
@@ -136,6 +187,9 @@ do {
   console.log("\t ^");
   console.log("\t ^");
 
+  /* 
+  Calling getValidNumberInput function to get Number A from user
+  */
   numberA = getValidNumberInput("A");
 
   console.log(
@@ -156,10 +210,13 @@ do {
   console.log(message);
   console.log(message);
 
+  /* 
+  Calling again getValidNumberInput function to get Number B from user
+  */
   numberB = getValidNumberInput("B");
 
   console.log(
-    "\t[" +
+    "\n\t[" +
       numberA +
       "] " +
       validOperatorValues[operatorIndex] +
@@ -168,6 +225,10 @@ do {
       "]."
   );
 
+  /*
+  Use a `switch` statement to call the appropriate arithmetic function 
+  based on the operator
+  */
   switch (operator) {
     case "+":
       numberResult = add(numberA, numberB);
@@ -189,6 +250,7 @@ do {
       break;
   }
 
+  // Data Type Analysis & Conditional Output
   numberResult =
     numberResult ?? "Result is undefined or null, something went wrong!";
 
@@ -222,10 +284,10 @@ do {
     console.log("The result is: " + oddEvenStatus);
   }
 
+  // Exit Mechanism
   let status = prompt(
     "\n\nDo you want to still perform another calculation?\nType 1 to continue, or type 0 to stop : "
   );
-
   status == 1
     ? (inProcess = true)
     : status == 0
